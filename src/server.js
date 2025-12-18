@@ -4,6 +4,11 @@ const app = express();
 const path = require("path");
 const routes = require("./routes");
 const connection = require("./database/connection");
+require('./models/indexModels');
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "views"));
 
