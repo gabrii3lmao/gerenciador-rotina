@@ -29,6 +29,10 @@ DiaAtividade.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    inicioEm: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     sequelize,
