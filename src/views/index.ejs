@@ -1,24 +1,47 @@
-<h1>Minha Semana</h1>
+<h2 class="page-title">Minha Semana</h2>
 
-<% days.forEach(day => { %>
-  <section>
-    <h2><%= day.weekday %></h2>
+<div class="days-column">
+  <% days.forEach(day => { %>
+  <section class="day-big-card" data-collapsible>
+    <header class="day-title">
+      <button class="day-toggle" type="button">
+        <h3><%= day.weekday.toUpperCase() %></h3>
+        <span class="chevron">▾</span>
+      </button>
+    </header>
 
-    <% if (day.activities.length === 0) { %>
-      <p>Nenhuma atividade ainda</p>
-    <% } %>
+    <div class="day-content">
+      <div class="activities">
+        <% if (day.activities.length === 0) { %>
+        <p class="empty">Nenhuma atividade ainda</p>
+        <% } else { %> <% day.activities.forEach(activity => { %>
+        <div class="activity-row">
+          <span class="activity-name"><%= activity.title %></span>
 
-    <ul>
-      <% day.activities.forEach(activity => { %>
-        <li>
-          <strong><%= activity.title %></strong>
-          — <%= activity.durationMin %> min
-        </li>
-      <% }) %>
-    </ul>
+          <div class="activity-controls">
+            <span class="activity-duration">
+              <%= activity.durationMin %>:00
+            </span>
 
-    <a href="/days/<%= day._id %>/activities/new">
-      + Nova atividade
-    </a>
+            <button class="btn-start">Iniciar</button>
+            <button class="btn-stop">Parar</button>
+          </div>
+
+          <button class="activity-more">⋯</button>
+        </div>
+
+        <% }) %> <% } %>
+      </div>
+
+      <footer class="day-footer">
+        <a href="/days/<%= day._id %>/activities/new" class="add-btn">
+          + Nova atividade
+        </a>
+      </footer>
+    </div>
   </section>
-<% }) %>
+
+  <% }) %>
+</div>
+
+<script src="/js/timer.js"></script>

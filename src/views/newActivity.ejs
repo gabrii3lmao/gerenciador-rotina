@@ -1,15 +1,21 @@
-<h1>Nova atividade — <%= day.weekday %></h1>
+<h2 class="page-title">
+  Nova atividade — <span><%= day.weekday %></span>
+</h2>
 
-<form action="/days/<%= day._id %>/activities?_method=POST" method="POST">
-  <label>
-    Título
+<form
+  class="activity-form"
+  action="/days/<%= day._id %>/activities?_method=POST"
+  method="POST"
+>
+  <div class="form-group">
+    <label>Título</label>
     <input type="text" name="title" required />
-  </label>
+  </div>
 
-  <label>
-    Duração (min)
-    <input type="number" name="durationMin" required />
-  </label>
+  <div class="form-group">
+    <label>Duração (min)</label>
+    <input type="number" name="durationMin" min="1" required />
+  </div>
 
-  <button type="submit">Criar</button>
+  <button type="submit" class="primary-btn">Criar atividade</button>
 </form>
