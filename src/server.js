@@ -2,26 +2,33 @@ const express = require("express");
 const PORT = 3000;
 const app = express();
 const path = require("path");
-const routes = require("./routes");
-const connection = require("./database/connection");
-require('./models/indexModels');
+const mongoose = require("mongoose");
+const methodOverride = require("method-override");
+const seedDays = require("./seedDay");
+const router = require("./routes/activityRoutes");
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(methodOverride("_method"));
+app.use(express.static(path.resolve(__dirname, "public"))); // carrega os elementos estaticos (css e js)
+app.use(router);
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "views"));
 
-app.use(express.static(path.resolve(__dirname, "public"))); // carrega os elementos estaticos (css e js)
-app.use(routes); // utiliza as rotas
-
 async function startServer() {
-  // transformar em uma função assincronar assim que tiver um Banco de dados
-  await connection.authenticate();
-  await connection.sync();
-  app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta: http://localhost:${PORT}`);
-  });
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/activities_db");
+    console.log(`Connected to the database`);
+    app.listen(PORT, async () => {
+      await seedDays();
+      console.log(`Servidor rodando na porta: http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.log(
+      `There was an error trying to connect to the Database: ${error}`
+    );
+  }
 }
 
 startServer();

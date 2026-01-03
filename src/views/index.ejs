@@ -1,0 +1,24 @@
+<h1>Minha Semana</h1>
+
+<% days.forEach(day => { %>
+  <section>
+    <h2><%= day.weekday %></h2>
+
+    <% if (day.activities.length === 0) { %>
+      <p>Nenhuma atividade ainda</p>
+    <% } %>
+
+    <ul>
+      <% day.activities.forEach(activity => { %>
+        <li>
+          <strong><%= activity.title %></strong>
+          — <%= activity.durationMin %> min
+        </li>
+      <% }) %>
+    </ul>
+
+    <a href="/days/<%= day._id %>/activities/new">
+      + Nova atividade
+    </a>
+  </section>
+<% }) %>

@@ -1,0 +1,15 @@
+<h1>Nova atividade — <%= day.weekday %></h1>
+
+<form action="/days/<%= day._id %>/activities?_method=POST" method="POST">
+  <label>
+    Título
+    <input type="text" name="title" required />
+  </label>
+
+  <label>
+    Duração (min)
+    <input type="number" name="durationMin" required />
+  </label>
+
+  <button type="submit">Criar</button>
+</form>
