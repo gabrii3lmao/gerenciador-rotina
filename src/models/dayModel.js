@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const activitySchema = new mongoose.Schema({
   title: { type: String },
   durationMin: { type: Number },
+  completed: { type: Boolean, default: false },
 });
 
 const daySchema = new mongoose.Schema({

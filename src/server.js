@@ -25,7 +25,7 @@ async function startServer() {
     console.log(`Connected to the database`);
     app.listen(PORT, async () => {
       await seedDays();
-      console.log(`Servidor rodando na porta: http://localhost:${PORT}`);
+      console.log(`Server running on port: http://localhost:${PORT}`);
     });
   } catch (error) {
     console.log(

@@ -21,7 +21,7 @@ module.exports = {
 
   async updateActivity(req, res) {
     const { dayId, activityId } = req.params;
-    const { title, durationMin } = req.body;
+    const { title, durationMin, completed } = req.body;
 
     try {
       const day = await Day.findById(dayId);
@@ -32,10 +32,13 @@ module.exports = {
       if (!activity) {
         return res.status(404).json({ error: "Activity not found" });
       }
+
       if (title !== undefined) activity.title = title;
       if (durationMin !== undefined) activity.durationMin = durationMin;
+      if(completed !== undefined) activity.completed = completed;
       await day.save();
       res.json(activity);
+
     } catch (error) {
       console.log(
         `There was an error trying to update the activities: ${error}`
@@ -58,7 +61,7 @@ module.exports = {
       res.status(204).send();
     } catch (error) {
       console.log(
-        `There was an error trying to update the activities: ${error}`
+        `There was an error trying to delete the activity: ${error}`
       );
       res
         .status(500)

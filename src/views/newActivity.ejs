@@ -1,5 +1,6 @@
 <h2 class="page-title">
-  Nova atividade — <span><%= day.weekday %></span>
+  Nova atividade
+  <span class="page-subtitle"><%= day.weekday %></span>
 </h2>
 
 <form
@@ -8,14 +9,30 @@
   method="POST"
 >
   <div class="form-group">
-    <label>Título</label>
-    <input type="text" name="title" required />
+    <label for="title">Título</label>
+    <input
+      id="title"
+      type="text"
+      name="title"
+      placeholder="Ex: Estudar JavaScript"
+      required
+      autofocus
+    />
   </div>
 
-  <div class="form-group">
-    <label>Duração (min)</label>
-    <input type="number" name="durationMin" min="1" required />
+  <div class="form-group duration-group">
+    <label for="durationMin">Duração (min)</label>
+    <input
+      id="durationMin"
+      type="number"
+      name="durationMin"
+      min="1"
+      placeholder="30"
+      required
+    />
   </div>
 
-  <button type="submit" class="primary-btn">Criar atividade</button>
+  <button type="submit" class="primary-btn">
+    Criar
+  </button>
 </form>
